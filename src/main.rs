@@ -1,5 +1,4 @@
-use sp_core::{Hasher, H160, H256, U256};
-use hex_literal::hex;
+use sp_core::{Hasher, H160, H256};
 use sp_runtime::traits::BlakeTwo256;
 use sp_runtime::{AccountId32};
 
@@ -16,7 +15,7 @@ impl<H: Hasher<Out = H256>> AddressMapping<AccountId32> for HashedAddressMapping
 		data[4..24].copy_from_slice(&address[..]);
 		let hash = H::hash(&data);
 
-        println!("{}", hash);
+        // println!("{}", hash);
 
 		AccountId32::from(Into::<[u8; 32]>::into(hash))
 	}
@@ -26,8 +25,8 @@ fn main() {
     let data = HashedAddressMapping::<BlakeTwo256>
                 ::into_account_id(
                     H160::from_slice(
-                        &hex_literal::hex!("fF6a5C321D1AB7B48a39E62cE5de4b0E87EDc828")
+                        &hex_literal::hex!("3C5aaa434D8D47B37AD9aa055C5D3256C228A359")
                     )
                 );
-    print!("{:?}", data);
+    print!("{}", data);
 }
